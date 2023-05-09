@@ -9,7 +9,6 @@ WIDTH = 1600  # ゲームウィンドウの幅
 HEIGHT = 900  # ゲームウィンドウの高さ
 NUM_OF_BOMBS = 5  # 爆弾の数
 
-
 def check_bound(area: pg.Rect, obj: pg.Rect) -> tuple[bool, bool]:
     """
     オブジェクトが画面内か画面外かを判定し，真理値タプルを返す
@@ -153,7 +152,8 @@ def main():
     bird = Bird(3, (900, 400))
     bombs = [Bomb() for _ in range(NUM_OF_BOMBS)]
     beam = None
-
+    score = 0 
+    fonto = pg.font.Font(None, 70)
     tmr = 0
     while True:
         for event in pg.event.get():
@@ -174,7 +174,7 @@ def main():
                 pg.display.update()
                 time.sleep(1)
                 return
-            
+          
         key_lst = pg.key.get_pressed()
         bird.update(key_lst, screen)
 
@@ -185,8 +185,10 @@ def main():
                     beam = None
                     del bombs[i]
                     bird.change_img(6, screen)
+                    score += 1
                     break
-
+        txt = fonto.render(str(score), True, (0, 0, 0))
+        screen.blit(txt, [200, 200])
         pg.display.update()
         clock.tick(1000)
 
