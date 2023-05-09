@@ -142,6 +142,9 @@ class Beam:
         self._rct.move_ip(self._vx, self._vy)
         screen.blit(self._img, self._rct)
 
+class Explosion:
+    def __init__(self):
+        pass
 
 def main():
     pg.display.set_caption("たたかえ！こうかとん")
